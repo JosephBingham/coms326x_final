@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 FILE *file;
+
 int getFile(char *name){
 	if(file = fopen(name, "r")){
 		return 1;
@@ -9,6 +10,10 @@ int getFile(char *name){
 	}
 }
 int interpret(){
+	char ch;
+	while( (ch = getc(file)) != EOF){
+		printf("%c", ch);
+	}
 	printf("test\n");
 	return 0;
 }

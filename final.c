@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-//#include<assert.h>
 #ifndef SIZE
 #define SIZE 10000
 #endif
@@ -19,18 +18,11 @@ int interpret(char ch){
 	switch(ch){
 		case '+': tape[ind] += 1; break;
 		case '-': tape[ind] -= 1; break;
-		case '>': if (ind < SIZE) ind += 1; break;
+		case '>': if(ind < SIZE) ind += 1; break;
 		case '<': if(ind >= 0) ind -= 1; break;
 		case '.': printf("%c\n", tape[ind]); break;
 		case ',': printf("please enter char: "); scanf("%c", tape[ind]); break;
-		case '[': //begin loop logic
-//			while(tape[ind]){
-//				while((ch = getc(file)) != ']'){
-//					i++;
-//					interpret(
-//				}
-//			}
-			break;
+		case '[': break;//put in loop logic
 		default: break;
 	}
 	return 0;

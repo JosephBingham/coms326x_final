@@ -1,14 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<assert.h>
+//#include<assert.h>
 #ifndef SIZE
 #define SIZE 10000
 #endif
 
 int ind = 0;
 FILE *file;
-char *tape = char *calloc(SIZE, sizeof(char));
-
+char *tape;
 int getFile(char *name){
 	if(file = fopen(name, "r")){
 		return 1;
@@ -20,10 +19,10 @@ int interpret(char ch){
 	switch(ch){
 		case '+': tape[ind] += 1; break;
 		case '-': tape[ind] -= 1; break;
-		case '>': ind += 1; assert(ind < SIZE); break;
-		case '<': ind -= 1; assert(ind >= 0); break;
+		case '>': if (ind < SIZE) ind += 1; break;
+		case '<': if(ind >= 0) ind -= 1; break;
 		case '.': printf("%c\n", tape[ind]); break;
-		case ',': assert(scanf("%c", &tape[ind])); break;
+		case ',': printf("please enter char: "); scanf("%c", tape[ind]); break;
 		case '[': //begin loop logic
 //			while(tape[ind]){
 //				while((ch = getc(file)) != ']'){
@@ -38,6 +37,8 @@ int interpret(char ch){
 }
 
 int main(int argc, char *argv[] ){
+	char *tape = (char *)calloc(SIZE, sizeof(char));
+
 	char *name = argv[1];
 
 	if(getFile(name)){

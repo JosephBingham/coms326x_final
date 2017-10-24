@@ -1,5 +1,5 @@
 make: final.c
-	gcc final.c -o final -O3;
+	gcc final.c -o final -O3 -std=gnu99;
 git:
 	git add *
 	git commit -m "working"

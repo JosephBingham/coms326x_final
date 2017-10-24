@@ -1,13 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<assert.h>
 #ifndef SIZE
 #define SIZE 10000
 #endif
 
-int index = 0;
+int ind = 0;
 FILE *file;
-char *tape = (char *)calloc(SIZE*sizeof(char));
+char *tape = char *calloc(SIZE, sizeof(char));
 
 int getFile(char *name){
 	if(file = fopen(name, "r")){
@@ -18,28 +18,33 @@ int getFile(char *name){
 }
 int interpret(char ch){
 	switch(ch){
-		case '+': tape[index] += 1; break;
-		case '-': tape[index] -= 1; break;
-		case '>': index += 1; assert(index < SIZE); break;
-		case '<': index -= 1; assert(index >= 0); break;
-		case '.': printf("%c\n", tape[index]); break;
-		case ',': scanf("%c", &tape[index]); break;
+		case '+': tape[ind] += 1; break;
+		case '-': tape[ind] -= 1; break;
+		case '>': ind += 1; assert(ind < SIZE); break;
+		case '<': ind -= 1; assert(ind >= 0); break;
+		case '.': printf("%c\n", tape[ind]); break;
+		case ',': assert(scanf("%c", &tape[ind])); break;
 		case '[': //begin loop logic
-			while(tape[index]){
-				
-				while((ch = getc(file)) != ']'){
-					i++;
-					interpret(
-				}
-			}
+//			while(tape[ind]){
+//				while((ch = getc(file)) != ']'){
+//					i++;
+//					interpret(
+//				}
+//			}
 			break;
+		default: break;
 	}
+	return 0;
 }
 
 int main(int argc, char *argv[] ){
 	char *name = argv[1];
+
 	if(getFile(name)){
-		interpret(file);
+		char ch;
+		while((ch = getc(file)) != EOF){
+			interpret(ch);
+		}
 	} else {
 	printf("something went wrong with getting the file\n");
 	}

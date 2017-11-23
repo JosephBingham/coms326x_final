@@ -32,13 +32,9 @@ int initFile(char *name){
       size++;
     }
   }
-  if(!(loop == 0 || loop == 1)){
-    printf("Syntax error: mismatched loop/n");
-    return 0;
-  }
-  fclose(file);
-  if(!(file = fopen(name, "r"))){
-    size = 0; 
+  if(!(loop == 0)){
+    printf("Syntax error: mismatched loop\n");
+    return -1;
   }
   return size;
 } /* initFile */
@@ -52,7 +48,7 @@ int initFile(char *name){
   int = 1 if successful interpretation. 0 else. 
 */
 int interpret(char *t){
-  printf("success");
+  printf("success\n");
   return 0;
 } /* interpret */
 
@@ -63,7 +59,11 @@ int interpret(char *t){
 int main(int argc, char *argv[] ){
   char *name = argv[1];
   int rTapeSize = 0;
-  if((rTapeSize = initFile(name))){
+  if((rTapeSize = initFile(name)) == 0){
+    printf("something went wrong with getting the file\n");
+    return 1;
+  }
+  else if(rTapeSize > 0){
     rTape = (char *)calloc(rTapeSize, sizeof(char));
     char ch;
     int i = 0;
@@ -73,8 +73,6 @@ int main(int argc, char *argv[] ){
     }
     interpret(rTape);
     return 0;
-  } else {
-    printf("something went wrong with getting the file\n");
-    return 1;
   }
+
 }
